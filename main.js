@@ -7,15 +7,20 @@ function startgame(){
     //var person = document.getElementById("person");
     var personx = 200;
     var persony = 400;
+    var fireballx = [0,0,0,0];//基本攻擊
+    var firebally = [0,0,0,0];
     var personright = false;
     var personleft = false;
     var attack = false;
     var fireball = false;
+    var fireballexecute = [false,false,false,false];
+    var fireballexecutetimes = [20,0,0,0];
     var count = 5;
     var enemyx = [0,0,0,0,0,0,0,0,0,0];//1-10隻敵人的x座標
     var enemyy = [0,0,0,0,0,0,0,0,0,0];//1-10隻敵人的y座標
+
     var personimg = document.createElement("img");
-    var attackimg = document.createElement("img");
+    var fireballimg = document.createElement("img");
     
     
     var pci = 2;
@@ -63,7 +68,7 @@ function startgame(){
             personright = false;
         }
         else if(e.keyCode == 90){
-            //fire
+            fireball = false;
             attack = false;
         }
     }
@@ -83,21 +88,40 @@ function startgame(){
        
        if(attack){
              personimg.src = "images/attack.png";    
-             pci =2;
+             pci = 2;
        }
        
-       cxt.drawImage(personimg,personx,persony,100,100);
-       if(fireball){
-            for(var i = 0;i < 5;i++){
-                cxt.drawImage(personimg,personx + 3,persony,100,100);
-            }
-
-        }
+       cxt.drawImage(personimg,personx,persony,100,100); 
        //pci++;
-        
+        fireballmove();
 
         //console.log(personright);
            
+    }
+
+    function fireballmove(){
+        for(var i = 1;i < 4;i++){
+                //if(fireballexecutetimes[i-1] > 10 || fireballexecute[i]){
+                    if(fireballexecutetimes[i-1] > 10 ){
+                    if(fireball && !fireballexecute[i] ){
+                        fireballexecute[i] = true;
+                        fireballx[i] = personx;
+                        firebally[i] = persony;
+                    }
+                    if(fireballexecute[i]){
+                        fireballimg.src = "images/fireball.png"; 
+                        cxt.drawImage(fireballimg,fireballx[i],firebally[i],100,100);
+                        fireballx[i] += 20;
+                        fireballexecutetimes[i]++;
+                    }
+                    if(fireballexecutetimes[i] == 20){
+                        fireballexecutetimes[i] = 0;
+                        fireballexecute[i] = false;
+                    }
+          }
+            console.log( fireballexecute[i]);
+        }
+        
     }
     setInterval(draw,30); 
 draw();
