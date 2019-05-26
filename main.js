@@ -13,16 +13,26 @@ function startgame(){
     var personleft = false;
     var attack = false;
     var fireball = false;
-    var fireballexecute = [true,false,false,false];
+    var fireballexecute = [false,false,false,false];
     var fireballexecutetimes = [0,0,0,0];
     var count = 5;
-    var enemyx = [0,0,0,0,0,0,0,0,0,0];//1-10隻敵人的x座標
-    var enemyy = [0,0,0,0,0,0,0,0,0,0];//1-10隻敵人的y座標
-
+    var enemyx = [100,200,300,876,234,564,378,1245,500,22];//1-10隻敵人的x座標
+    var enemyy = [390,390,390,390,390,390,390,390,390,390];//1-10隻敵人的y座標
+    var enemymove = [0,0,0,0,0,0,0,0,0,0];
+    for(var i =0;i<10;i++){
+        enemyx[i] = Math.floor(Math.random()*1500);
+    }
+    var changeenemyimg = [0,0,0,0,0,0,0,0,0,0];
+    var badmanpicture = [1,1,1,1,1,1,1,1,1,1];
+    var does = 0;
+    var enemynumber = 1;
+    var enemyisproduce = [true,true,true,true,true,true,true,true,true,true];
+    var enemydirection = [true,true,true,true,true,true,true,true,true,true];
     var personimg = document.createElement("img");
     personimg.src = "images/002.png";
     var fireballimg = document.createElement("img");
-    
+    var enemyimg = document.createElement("img");
+    enemyimg.src = "images/badman_001.png";
     var directionisright = true;
     var fireballdirection = [true,true,true,true];
 
@@ -89,7 +99,7 @@ function startgame(){
             pci = 1;
             count = 0;
         }
-        console.log(count);
+       
         if(personright)//面右
              personimg.src = "images/00"+pci+".png";
        else if(personleft)//面左
@@ -105,11 +115,87 @@ function startgame(){
        cxt.drawImage(personimg,personx,persony,100,100); 
        //pci++;
         fireballmove();
-
+        produceenemy();
         //console.log(personright);
            
     }
-    function produceenemy(){}
+
+
+    var n = 0;
+    function produceenemy(){
+        n++;
+        if(n == 100)
+        {
+            n = 0;
+            enemynumber++;
+        }
+        if(enemynumber>7)
+             enemynumber = 7;
+        // for(var i = 0;i < enemynumber;i++){
+
+        //     if(enemyisproduce[i]){      
+        //         if(!enemydirection[i]) 
+        //             enemyimg.src = "images/badman_000"+badmanpicture[i]+".png";
+        //         else
+        //            enemyimg.src = "images/badman_00"+badmanpicture[i]+".png";
+        //         cxt.drawImage(enemyimg, enemyx[i],enemyy[i],100,100);
+        //     }
+        // }
+        
+
+        does++;
+        for(var i = 0;i < enemynumber;i++){
+
+            cxt.drawImage(enemyimg, enemyx[i],enemyy[i],100,100);
+            enemyimg.src = "images/badman_000"+badmanpicture[i]+".png";
+            if(!enemydirection[i])
+            {
+                enemyimg.src = "images/badman_000"+badmanpicture[0]+".png";
+            }
+            else
+            {
+                enemyimg.src = "images/badman_00"+badmanpicture[0]+".png";
+            }
+            
+            changeenemyimg[i]++;
+            if(changeenemyimg[i] > 5){
+                badmanpicture[i]++;
+                if(badmanpicture[i] > 3){
+                    badmanpicture[i] = 1;
+                }
+                changeenemyimg[i] = 0;
+            }
+            if(does == 20 ){
+                var number = Math.floor(Math.random()*2)+1;
+                if(number == 1 && enemyx[i] <1450){
+                    enemydirection[i] = false;
+                    enemymove[i] = Math.floor(Math.random()*5)+1;
+                }
+                else if(number == 2 && enemyx[i] > 0){
+                    enemydirection[i] = true;
+                     enemymove[i] = -Math.floor(Math.random()*9)+1;
+                }
+                if(i == enemynumber - 1)
+                     does = 0;
+                // console.log(enemymove[i]);
+                // console.log(number);
+            }
+
+            if(enemyx[i] > 0 &&enemyx[i] <1400){
+                enemyx[i] += enemymove[i];
+            }
+            else if(enemyx[i] >= 1400){
+                enemyx[i] = 1399;
+            }
+            else if(enemyx[i] <= 0)
+                 enemyx[i] = 1;
+
+            
+            console.log(enemyimg);
+            console.log(enemyx[0]);
+            console.log(enemyy[0]);
+        }
+    }
 
 
     function fireballmove(){
