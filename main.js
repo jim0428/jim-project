@@ -5,6 +5,7 @@ function startgame(){
     cxt.fillStyle= "#FF0000";
     //cxt.fillRect(0,0,150,75);
     //var person = document.getElementById("person");
+    var mainblood = 1000;
     var personx = 200;
     var persony = 400;
     var fireballx = [0,0,0,0];//基本攻擊
@@ -18,7 +19,9 @@ function startgame(){
     var count = 5;
     var enemyx = [100,200,300,876,234,564,378,1245,500,22];//1-10隻敵人的x座標
     var enemyy = [390,390,390,390,390,390,390,390,390,390];//1-10隻敵人的y座標
+    var enemyblood = [100,100,100,100,100,100,100,100,100,100]//敵人的血量
     var enemymove = [0,0,0,0,0,0,0,0,0,0];
+    var revival = 0;
     for(var i =0;i<10;i++){
         enemyx[i] = Math.floor(Math.random()*1500);
     }
@@ -32,6 +35,18 @@ function startgame(){
     personimg.src = "images/002.png";
     var fireballimg = document.createElement("img");
     var enemyimg = document.createElement("img");
+    var enemyarr = [];
+    for(var i =0;i < 4;i++){
+        enemyarr[i] = document.createElement("img");
+    }
+    var enemyarrl = [];
+    for(var i =0;i < 4;i++){
+        enemyarrl[i] = document.createElement("img");
+    }
+    for(var i = 1;i < 4;i++){
+        enemyarr[i].src = "images/badman_00"+i+".png";//先load
+        enemyarrl[i].src = "images/badman_000"+i+".png";
+    }
     enemyimg.src = "images/badman_001.png";
     var directionisright = true;
     var fireballdirection = [true,true,true,true];
@@ -116,10 +131,42 @@ function startgame(){
        //pci++;
         fireballmove();
         produceenemy();
+        hit();
         //console.log(personright);
            
     }
-
+   
+    function hit(){
+        for(var i = 1;i < 4;i++){
+            if(fireballexecute[i]){//火球在右邊的時候，但不能只有判斷方向
+                for(var k = 0;k < enemynumber;k++){
+                    if(enemyx[k] - 11 < fireballx[i] &&enemyx[k] +11 > fireballx[i]){
+                        enemyblood[k] -= 20;
+                        if( enemyblood[k] < 0 )
+                        {
+                            enemyisproduce[k] = false;
+                        }
+                        fireballexecute[i] = false;
+                        fireballx[i] = -1;
+                        break;
+                    }
+                 }
+                 
+            }
+            // else if(!fireballdirection[i] && fireballexecute[i]){//火球在左邊的時候
+            //     for(var k = 0;k < 10;k++){
+            //         if(enemyx[k] > fireballx[i] -20 &&enemyx[k] > fireballx[i] +20){
+            //             enemyblood[k] -= 20;
+            //             fireballexecute[i] = false;
+            //             fireballx[i] = 1600;
+            //             break;
+            //         }
+            //      }
+            // }
+            
+        }
+        console.log(enemyblood[0]);
+    }
 
     var n = 0;
     function produceenemy(){
@@ -131,69 +178,63 @@ function startgame(){
         }
         if(enemynumber>7)
              enemynumber = 7;
-        // for(var i = 0;i < enemynumber;i++){
-
-        //     if(enemyisproduce[i]){      
-        //         if(!enemydirection[i]) 
-        //             enemyimg.src = "images/badman_000"+badmanpicture[i]+".png";
-        //         else
-        //            enemyimg.src = "images/badman_00"+badmanpicture[i]+".png";
-        //         cxt.drawImage(enemyimg, enemyx[i],enemyy[i],100,100);
-        //     }
-        // }
-        
 
         does++;
+ 
         for(var i = 0;i < enemynumber;i++){
-
-            cxt.drawImage(enemyimg, enemyx[i],enemyy[i],100,100);
-            enemyimg.src = "images/badman_000"+badmanpicture[i]+".png";
-            if(!enemydirection[i])
-            {
-                enemyimg.src = "images/badman_000"+badmanpicture[0]+".png";
-            }
-            else
-            {
-                enemyimg.src = "images/badman_00"+badmanpicture[0]+".png";
-            }
-            
-            changeenemyimg[i]++;
-            if(changeenemyimg[i] > 5){
-                badmanpicture[i]++;
-                if(badmanpicture[i] > 3){
-                    badmanpicture[i] = 1;
+            if(enemyisproduce[i]){
+                cxt.drawImage(enemyimg, enemyx[i],enemyy[i],100,100);
+                if(!enemydirection[i])
+                {
+                     enemyimg.src = enemyarrl[badmanpicture[i]].src;
                 }
-                changeenemyimg[i] = 0;
-            }
-            if(does == 20 ){
-                var number = Math.floor(Math.random()*2)+1;
-                if(number == 1 && enemyx[i] <1450){
-                    enemydirection[i] = false;
-                    enemymove[i] = Math.floor(Math.random()*5)+1;
+                else
+                {
+                    enemyimg.src = enemyarr[badmanpicture[i]].src;
                 }
-                else if(number == 2 && enemyx[i] > 0){
-                    enemydirection[i] = true;
-                     enemymove[i] = -Math.floor(Math.random()*9)+1;
+                console.log(enemyimg);
+                changeenemyimg[i]++;
+                if(changeenemyimg[i] > 5){
+                    badmanpicture[i]++;
+                    if(badmanpicture[i] > 3){
+                        badmanpicture[i] =1;
+                    }
+                    changeenemyimg[i] = 0;
                 }
-                if(i == enemynumber - 1)
-                     does = 0;
-                // console.log(enemymove[i]);
-                // console.log(number);
-            }
+                if(does == 20 ){
+                    var number = Math.floor(Math.random()*2)+1;
+                    if(number == 1 && enemyx[i] <1450){
+                        enemydirection[i] = false;
+                        enemymove[i] = Math.floor(Math.random()*5)+1;
+                    }
+                    else if(number == 2 && enemyx[i] > 0){
+                        enemydirection[i] = true;
+                        enemymove[i] = -Math.floor(Math.random()*9)+1;
+                    }
+                    if(i == enemynumber - 1)
+                        does = 0;
+                    // console.log(enemymove[i]);
+                    // console.log(number);
+                }
 
-            if(enemyx[i] > 0 &&enemyx[i] <1400){
-                enemyx[i] += enemymove[i];
-            }
-            else if(enemyx[i] >= 1400){
-                enemyx[i] = 1399;
-            }
-            else if(enemyx[i] <= 0)
-                 enemyx[i] = 1;
-
-            
-            console.log(enemyimg);
-            console.log(enemyx[0]);
-            console.log(enemyy[0]);
+                if(enemyx[i] > 0 &&enemyx[i] <1400){
+                    enemyx[i] += enemymove[i];
+                }
+                else if(enemyx[i] >= 1400){
+                    enemyx[i] = 1399;
+                }
+                else if(enemyx[i] <= 0)
+                    enemyx[i] = 1;
+               
+        }
+        else {
+            revival++;
+            if(revival > 10){
+            enemyx[i] = Math.floor(Math.random()*1390) + 1;
+            enemyisproduce[i] = true;
+            enemyblood[i] = 100;
+             }
+        }
         }
     }
 
