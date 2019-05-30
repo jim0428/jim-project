@@ -1,5 +1,6 @@
 
 function startgame(){ 
+    $('#push').css("display","none");
     var c = document.getElementById("myCanvas");
     var cxt=c.getContext("2d");
     cxt.fillStyle= "#FF0000";
@@ -21,7 +22,7 @@ function startgame(){
     var enemyy = [390,390,390,390,390,390,390,390,390,390];//1-10隻敵人的y座標
     var enemyblood = [100,100,100,100,100,100,100,100,100,100]//敵人的血量
     var enemymove = [0,0,0,0,0,0,0,0,0,0];
-    var revival = 0;
+    var revival = [0,0,0,0,0,0,0,0,0,0];
     for(var i =0;i<10;i++){
         enemyx[i] = Math.floor(Math.random()*1500);
     }
@@ -36,17 +37,19 @@ function startgame(){
     var fireballimg = document.createElement("img");
     var enemyimg = document.createElement("img");
     var enemyarr = [];
-    for(var i =0;i < 4;i++){
+    for(var i =0;i < 5;i++){
         enemyarr[i] = document.createElement("img");
     }
     var enemyarrl = [];
-    for(var i =0;i < 4;i++){
+    for(var i =0;i < 5;i++){
         enemyarrl[i] = document.createElement("img");
     }
     for(var i = 1;i < 4;i++){
         enemyarr[i].src = "images/badman_00"+i+".png";//先load
         enemyarrl[i].src = "images/badman_000"+i+".png";
     }
+    enemyarr[4].src = "images/behit.png";/////
+    enemyarrl[4].src = "images/behit2.png";/////
     enemyimg.src = "images/badman_001.png";
     var directionisright = true;
     var fireballdirection = [true,true,true,true];
@@ -132,20 +135,37 @@ function startgame(){
         fireballmove();
         produceenemy();
         hit();
+        mainminusblood();
         //console.log(personright);
            
     }
-   
+    function mainminusblood(){
+        for(var i = 0;i < enemynumber;i++){
+            if(enemyx[i] - 11 < personx && enemyx[i] + 11 >personx && enemyblood[i] > 0){
+                mainblood -= 100;
+            }
+        }
+        if(mainblood <= 0){
+            window.alert("you are dead.");
+            clearInterval(interval);
+            if(window.confirm("Play Again?")){
+                startgame();
+            }else{
+                $('#myCanvas').css("display","none");
+            }
+
+        }
+    }
     function hit(){
         for(var i = 1;i < 4;i++){
             if(fireballexecute[i]){//火球在右邊的時候，但不能只有判斷方向
                 for(var k = 0;k < enemynumber;k++){
-                    if(enemyx[k] - 11 < fireballx[i] &&enemyx[k] +11 > fireballx[i]){
+                    if(enemyx[k] - 11 < fireballx[i] &&enemyx[k] +11 > fireballx[i] && enemyblood[k] > 0){
                         enemyblood[k] -= 20;
-                        if( enemyblood[k] < 0 )
-                        {
-                            enemyisproduce[k] = false;
-                        }
+                        // if( enemyblood[k] < 0 )
+                        // {
+                        //     enemyisproduce[k] = false;
+                        // }
                         fireballexecute[i] = false;
                         fireballx[i] = -1;
                         break;
@@ -153,19 +173,7 @@ function startgame(){
                  }
                  
             }
-            // else if(!fireballdirection[i] && fireballexecute[i]){//火球在左邊的時候
-            //     for(var k = 0;k < 10;k++){
-            //         if(enemyx[k] > fireballx[i] -20 &&enemyx[k] > fireballx[i] +20){
-            //             enemyblood[k] -= 20;
-            //             fireballexecute[i] = false;
-            //             fireballx[i] = 1600;
-            //             break;
-            //         }
-            //      }
-            // }
-            
         }
-        console.log(enemyblood[0]);
     }
 
     var n = 0;
@@ -176,32 +184,48 @@ function startgame(){
             n = 0;
             enemynumber++;
         }
-        if(enemynumber>7)
-             enemynumber = 7;
+        if(enemynumber>10)
+             enemynumber = 10;
 
-        does++;
+        does++;//加到二十更改位移
  
         for(var i = 0;i < enemynumber;i++){
-            if(enemyisproduce[i]){
-                cxt.drawImage(enemyimg, enemyx[i],enemyy[i],100,100);
-                if(!enemydirection[i])
-                {
-                     enemyimg.src = enemyarrl[badmanpicture[i]].src;
+            if(enemyisproduce[i]){//活的話會一直畫
+                if(enemyblood[i] > 0){//怪物還活著
+                    if(!enemydirection[i])//方向判定
+                    {
+                        enemyimg.src = enemyarrl[badmanpicture[i]].src;
+                    }
+                    else
+                    {
+                        enemyimg.src = enemyarr[badmanpicture[i]].src;
+                    }
                 }
-                else
-                {
-                    enemyimg.src = enemyarr[badmanpicture[i]].src;
+                else{//怪物死了
+                    revival[i]++;
+                    if(revival[i] == 17)//讓死掉的動畫存在17貞
+                    {
+                        revival[i] = 0;//沒歸零 下次死掉有可能直接復活 沒延遲
+                        enemyisproduce[i] = false;//不要畫 連屍體都不要 被消滅了 
+                    }
+                    if(!enemydirection[i])//方向判定
+                    {
+                         enemyimg.src = enemyarr[4].src;
+                    }
+                    else{
+                        enemyimg.src = enemyarrl[4].src;
+                    }
                 }
-                console.log(enemyimg);
+                cxt.drawImage(enemyimg, enemyx[i],enemyy[i],100,100);//設定好images 在畫
                 changeenemyimg[i]++;
-                if(changeenemyimg[i] > 5){
+                if(changeenemyimg[i] > 5){//怪物走路換圖片
                     badmanpicture[i]++;
                     if(badmanpicture[i] > 3){
                         badmanpicture[i] =1;
                     }
                     changeenemyimg[i] = 0;
                 }
-                if(does == 20 ){
+                if(does > 20 ){//算到20讓她動
                     var number = Math.floor(Math.random()*2)+1;
                     if(number == 1 && enemyx[i] <1450){
                         enemydirection[i] = false;
@@ -213,8 +237,6 @@ function startgame(){
                     }
                     if(i == enemynumber - 1)
                         does = 0;
-                    // console.log(enemymove[i]);
-                    // console.log(number);
                 }
 
                 if(enemyx[i] > 0 &&enemyx[i] <1400){
@@ -226,18 +248,22 @@ function startgame(){
                 else if(enemyx[i] <= 0)
                     enemyx[i] = 1;
                
-        }
-        else {
-            revival++;
-            if(revival > 10){
-            enemyx[i] = Math.floor(Math.random()*1390) + 1;
-            enemyisproduce[i] = true;
-            enemyblood[i] = 100;
-             }
-        }
+            }
+            else {
+                revival[i]++;//每隻怪復活會有延遲
+                if(revival[i] > 50){
+                    revival[i] = 0; 
+                    do{
+                        enemyx[i] = Math.floor(Math.random()*1390) + 1;
+                    }//復活給位置
+                    while(enemyx[i] - 50 < personx && enemyx[i] + 50 >personx);
+                    enemyisproduce[i] = true;//復活
+                    enemyblood[i] = 100;
+                }
+            }
         }
     }
-
+    
 
     function fireballmove(){
         for(var i = 1;i < 4;i++){
@@ -294,6 +320,6 @@ function startgame(){
         }
         
     }
-    setInterval(draw,30); 
+    var interval = setInterval(draw,30); 
 draw();
 }
