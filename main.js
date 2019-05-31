@@ -57,18 +57,19 @@ function startgame(){
     var pci = 2;
     document.addEventListener("keydown",keydownn,false);
     document.addEventListener("keyup",keyupp,false);
+    var score = 0;
     function keydownn(e){
         if(e.keyCode == 87){
             personleft =false;
         }
-        else if(e.keyCode == 65){
+        else if(e.keyCode == 37){
             directionisright = false;
             personleft = true;
         }
         else if(e.keyCode == 83){
             personleft =false;
         }
-        else if(e.keyCode == 68){
+        else if(e.keyCode == 39){
             directionisright = true;
             //console.log(22);
             personright = true;
@@ -83,13 +84,13 @@ function startgame(){
         if(e.keyCode == 87){
             personleft = false;
         }
-        else if(e.keyCode == 65){
+        else if(e.keyCode == 37){
             personleft = false;
         }
         else if(e.keyCode == 83){
             personleft = false;
         }
-        else if(e.keyCode == 68){
+        else if(e.keyCode == 39){
             personright = false;
         }
         else if(e.keyCode == 90){
@@ -100,7 +101,8 @@ function startgame(){
     function draw(){
         
         cxt.clearRect(0,0,c.width,c.height);
-        
+       
+
         if(personright){ 
             if(personx < 1400)
                 personx += 10;
@@ -136,13 +138,41 @@ function startgame(){
         produceenemy();
         hit();
         mainminusblood();
+        drawmainblood();
+        drawscore();
+        score++;
         //console.log(personright);
            
+    }
+    function drawscore(){
+        cxt.font = "15px Verdana";
+        cxt.fillStyle = "#1BF6EB";
+        cxt.fillText("Your score: "+score,0,20);
+    }
+    function drawmainblood(){
+        cxt.beginPath();
+        cxt.rect(150,0,mainblood*1.35, 20); 
+        if(mainblood>=850)
+            cxt.fillStyle= "#03F10B";
+        else if(mainblood>=850)
+            cxt.fillStyle= "#9AE14F";
+        else if(mainblood >= 500)
+            cxt.fillStyle= "#C9DC1F";
+        else if(mainblood >= 350)
+            cxt.fillStyle= "#DA8917"; 
+        else if(mainblood >= 250)
+            cxt.fillStyle= "#CB9424";       
+        else if(mainblood >= 150)
+            cxt.fillStyle = "#EF5411";
+        else
+            cxt.fillStyle = "#7F3C1F";
+        cxt.fill();
+        cxt.closePath();
     }
     function mainminusblood(){
         for(var i = 0;i < enemynumber;i++){
             if(enemyx[i] - 11 < personx && enemyx[i] + 11 >personx && enemyblood[i] > 0){
-                mainblood -= 100;
+                mainblood -= 20;
             }
         }
         if(mainblood <= 0){
@@ -160,7 +190,7 @@ function startgame(){
         for(var i = 1;i < 4;i++){
             if(fireballexecute[i]){//火球在右邊的時候，但不能只有判斷方向
                 for(var k = 0;k < enemynumber;k++){
-                    if(enemyx[k] - 11 < fireballx[i] &&enemyx[k] +11 > fireballx[i] && enemyblood[k] > 0){
+                    if(enemyx[k] - 11 < fireballx[i] &&enemyx[k] +11 > fireballx[i] && enemyblood[k] > 0){// enemyblood[k] > 0 這樣火球可以穿過屍體
                         enemyblood[k] -= 20;
                         // if( enemyblood[k] < 0 )
                         // {
