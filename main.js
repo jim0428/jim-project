@@ -1,6 +1,8 @@
 
 function startgame(){ 
     $('#push').css("display","none");
+    $("#ground").css("display","inline");
+    $("#wall").css("display","inline");
     var c = document.getElementById("myCanvas");
     var cxt=c.getContext("2d");
     cxt.fillStyle= "#FF0000";
@@ -53,7 +55,17 @@ function startgame(){
     enemyimg.src = "images/badman_001.png";
     var directionisright = true;
     var fireballdirection = [true,true,true,true];
-
+    // class a{
+    //      name(params) {
+            
+    //     }
+    //     constructor(){
+    //         this.b = 0;
+    //         this.c = 0;
+    //     }
+    // }
+    // var tmp = new a;
+    // tmp.name();
     var pci = 2;
     document.addEventListener("keydown",keydownn,false);
     document.addEventListener("keyup",keyupp,false);
@@ -62,19 +74,19 @@ function startgame(){
         if(e.keyCode == 87){
             personleft =false;
         }
-        else if(e.keyCode == 37){
+        else if(e.keyCode == 65){
             directionisright = false;
             personleft = true;
         }
         else if(e.keyCode == 83){
             personleft =false;
         }
-        else if(e.keyCode == 39){
+        else if(e.keyCode == 68){
             directionisright = true;
             //console.log(22);
             personright = true;
         }
-        else if(e.keyCode == 90){
+        else if(e.keyCode == 77){
             fireball = true;
             attack = true;
         }
@@ -84,16 +96,16 @@ function startgame(){
         if(e.keyCode == 87){
             personleft = false;
         }
-        else if(e.keyCode == 37){
+        else if(e.keyCode == 65){
             personleft = false;
         }
         else if(e.keyCode == 83){
             personleft = false;
         }
-        else if(e.keyCode == 39){
+        else if(e.keyCode == 68){
             personright = false;
         }
-        else if(e.keyCode == 90){
+        else if(e.keyCode == 77){
             fireball = false;
             attack = false;
         }

@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Box personal portfolio Template</title>
+        <link rel="icon" href="img/fav.png" type="image/x-icon">
+        <!-- Bootstrap -->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="ionicons/css/ionicons.min.css" rel="stylesheet">
+    
+        <!-- main css -->
+        <link href="css/style.css" rel="stylesheet">
+    
+    
+        <!-- modernizr -->
+        <script src="js/modernizr.js"></script>
+<head>
+        <style>
+                div{
+                    width: 100%;
+                    min-width: 1368px;
+                }
+                .bored_center{
+                    text-align: center;
+                    font-size:25pt;
+                    font-weight: bold;
+                    margin-top:-20px;
+                }
+                #score table{
+                    border-collapse: collapse;
+                    margin: 0px auto;
+                }
+                #score table tr td{
+                    width: 25px;
+                    text-align: center;
+                }
+                #score{
+                    height:320px;
+                }
+                #head_zone{
+                    height: 0px;
+                }
+                #board table{
+                    border-collapse: collapse;
+                    margin: 0px auto;
+                }
+                #board table tr td{
+                    width: 100px;
+                    height: 100px;
+                    text-align: center;
+                }
+                #socre_bored_p{
+                    text-align: center;
+                    width: 20%;
+                    position: relative;
+                    top:30px;
+                    height:50px;
+                    min-width: 300px;
+                    margin: 0px auto;
+                }
+                #rule{
+                    min-width: 200px;
+                    margin: 0px auto;
+                }
+    </style>
+
+<script>
+		var WF = 0;
+		var img;
+		var userimg;
+		var maoimg = 0;
+		var block;
+		var userTime;
+		var maoTime;
+		var CKscore;
+		function start(){
+			document.getElementById("scissors").addEventListener("click",GoToScissor,false);
+			document.getElementById("rock").addEventListener("click",GoToRock,false);
+			document.getElementById("papper").addEventListener("click",GoToPapper,false);
+		}
+		function GoToScissor(){
+			img = "images/剪刀.jpg";
+			userimg = 1;
+			mao();
+			block = document.getElementById("userBlock");
+			block.setAttribute("src",img);
+			document.getElementById("socre_bored_p").innerHTML="";
+		}
+		function GoToRock(){
+			img = "images/石頭.jpg";
+			userimg = 2;
+			mao();
+			block = document.getElementById("userBlock");
+			block.setAttribute("src",img);
+			document.getElementById("socre_bored_p").innerHTML="";
+		}
+		function GoToPapper(){
+			img = "images/布.jpg";
+			userimg = 3;
+			mao();
+			block = document.getElementById("userBlock");
+			block.setAttribute("src",img);
+			document.getElementById("socre_bored_p").innerHTML="";
+		}
+		function mao(){
+			for(var i = 1; i < 10; i++){
+				var Bwhite = document.getElementById(i);
+				Bwhite.setAttribute("src","images/空白.jpg");
+			}
+			maoimg =  Math.floor( 1 + Math.random() * 3 );
+			//maoimg = 2;
+			var block7 = document.getElementById("maoBlock");
+			block7.setAttribute("src","images/"+maoimg+".jpg");
+			if(userimg!=maoimg){
+				judge();
+				console.log(userimg);
+				console.log(maoimg);
+				//WF = 1;
+				play();
+				document.getElementById("scissors").removeEventListener("click",GoToScissor,false);
+				document.getElementById("rock").removeEventListener("click",GoToRock,false);
+				document.getElementById("papper").removeEventListener("click",GoToPapper,false);
+			}
+			else{
+				WF = 0;
+				console.log("maoimg");
+				var block6 = document.getElementById("userBlock");
+				block6.setAttribute("src","images/"+maoimg+".jpg");
+				var block8 = document.getElementById("maoBlock");
+				block8.setAttribute("src","images/"+maoimg+".jpg");
+				FF();
+			}
+		}
+		function judge(){
+			if(userimg==1){
+				if(maoimg==2){
+					WF = -1;
+				}
+				else{
+					WF = 1;
+				}
+			}
+			else if(userimg==2){
+				if(maoimg==3){
+					WF = -1;
+				}
+				else{
+					WF = 1;
+				}
+			}
+			else{
+				if(maoimg==1){
+					WF = -1;
+				}
+				else{
+					WF = 1;
+				}
+			}
+		}
+		var flag = 0;
+		var interval = null;
+		var numstart =0;
+		var save1 = 0;
+		var save2 = 0;
+		function play(){
+			save1 =  Math.floor( 1 + Math.random() * 9 );
+			var block1 = document.getElementById(save1);
+			do
+			{
+				save2 =  Math.floor( 1 + Math.random() * 9 );
+			}while(save1==save2);
+			var block2 = document.getElementById(save2);
+
+			numstart = new Date().getTime();
+			
+			
+			block1.setAttribute("src","images/001.jpg");
+			block2.setAttribute("src","images/002.jpg");
+			document.getElementById(save1).addEventListener("click",ckwin,false);
+			document.getElementById(save2).addEventListener("click",cklose,false);
+		}
+		function ckwin(){
+			if(WF==1){
+				userTime = new Date().getTime();
+				var num1 = parseInt(numstart);
+				var num2 = parseInt(userTime);
+				var num3 = parseInt(num2-num1);
+				console.log(num2 - num1);
+				do{
+					maoTime = Math.floor(1500 + Math.random()*1000);
+				}while(num3==maoTime);
+				//maoTime = 3000000;
+				//maoTime = 0;
+				if(num3 < maoTime){
+					userGetScore();
+					userGetScore_p();
+				}
+				else{
+					tooslow();
+				}
+			}
+			else{
+				maoGetScore();
+				userTakewrongThing();
+			}
+			FF();
+		}
+		function userGetScore_p(){
+			var show = document.getElementById("socre_bored_p");
+			show.innerHTML = "You hit!";
+		}
+		function userTakewrongThing(){
+			var show = document.getElementById("socre_bored_p");
+			show.innerHTML = "You Take wrong thing!";
+		}
+		function tooslow(){
+			var show = document.getElementById("socre_bored_p");
+			show.innerHTML = "You are too slow!";
+		}
+		var CountUserScore = 1;
+		function userGetScore(){
+			document.getElementById("userScore").innerHTML = CountUserScore;
+			CountUserScore++; 
+		}
+		
+		
+		function cklose(){
+			if(WF==-1){
+				userTime = new Date().getTime();
+				var num1 = parseInt(numstart);
+				var num2 = parseInt(userTime);
+				var num3 = parseInt(num2-num1);
+				console.log(num2 - num1);
+				do{
+					maoTime = Math.floor(1500 + Math.random()*1000);
+				}while(num3==maoTime);
+				//maoTime = 3000000;
+				//maoTime = 0;
+				if(num3 > maoTime){
+					maoGetScore();
+					maowin();
+				}
+				else{
+					 defense();
+				}
+			}
+			else{
+				maoGetScore();
+				userTakewrongThing();
+			}
+			FF();
+		}
+		function maowin(){
+			var show = document.getElementById("socre_bored_p");
+			show.innerHTML = "You got a hit!";
+		}
+		function defense(){
+			var show = document.getElementById("socre_bored_p");
+			show.innerHTML = "You defend!";
+		}
+		var CountMaoScore = 1;
+		function maoGetScore(){
+			document.getElementById("maoScore").innerHTML = CountMaoScore;
+			CountMaoScore++;
+		}
+
+		function FF(){
+			if(CountUserScore==6){
+				var show = document.getElementById("socre_bored_p").innerHTML="";
+				var show = document.getElementById("socre_bored_p").innerHTML="You win!";
+				document.getElementById("scissors").removeEventListener("click",ckwin,false);
+				document.getElementById(save2).removeEventListener("click",cklose,false);
+				restart();
+			}
+			else if(CountMaoScore==6){
+				var show = document.getElementById("socre_bored_p").innerHTML="";
+				var show = document.getElementById("socre_bored_p").innerHTML="You lost!";
+				document.getElementById("scissors").removeEventListener("click",ckwin,false);
+				document.getElementById(save2).removeEventListener("click",cklose,false);
+				restart();
+			}
+			else{
+				if(save1!=0){
+					var block1 = document.getElementById(save1);
+					block1.setAttribute("src","images/空白.jpg");
+					document.getElementById(save1).removeEventListener("click",ckwin,false);
+					save1 = 0;
+					var block5 = document.getElementById("maoBlock");
+					block5.setAttribute("src","images/空白.jpg");
+				}
+				if(save2!=0){
+					var block2 = document.getElementById(save2);
+					block2.setAttribute("src","images/空白.jpg");
+					document.getElementById(save2).removeEventListener("click",cklose,false);
+					save2 = 0;
+				}
+				WF = 0;
+				block = document.getElementById("userBlock");
+				block.setAttribute("src","images/空白.jpg");
+				maoimg = 0;
+				document.getElementById("scissors").addEventListener("click",GoToScissor,false);
+				document.getElementById("rock").addEventListener("click",GoToRock,false);
+				document.getElementById("papper").addEventListener("click",GoToPapper,false);
+			}
+		}
+		function restart(){
+			document.getElementById("5").setAttribute("src","images/restart.png");
+			document.getElementById("5").addEventListener("click",removeEveryThing,false);
+		}
+		function removeEveryThing(){
+			for(var i = 1;i<10;i++){
+				document.getElementById(i).setAttribute("src","images/空白.jpg");
+			}
+			document.getElementById("userBlock").setAttribute("src","images/空白.jpg");
+			document.getElementById("maoBlock").setAttribute("src","images/空白.jpg");
+			document.getElementById("socre_bored_p").innerHTML="";
+			save1=0;
+			save2=0;
+			CountUserScore = 1;
+			CountMaoScore = 1;
+			WF = 0;
+			document.getElementById("5").removeEventListener("click",removeEveryThing,false);
+			var zero = 0;
+			document.getElementById("userScore").innerHTML = 0;
+			document.getElementById("maoScore").innerHTML = 0;
+			start();
+		}
+		window.addEventListener( "load", start, false );
+	</script>
+
+
+
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>    
+
+<body>
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="pre-container">
+            <div class="spinner">
+                <div class="double-bounce1"></div>
+                <div class="double-bounce2"></div>
+            </div>
+        </div>
+    </div>
+    <!-- end Preloader -->
+
+    <div class="container-fluid">
+        <!-- box header -->
+        <header class="box-header">
+            <!-- box-nav -->
+            <a class="box-primary-nav-trigger" href="#0">
+                <span class="box-menu-text">Menu</span><span class="box-menu-icon"></span>
+            </a>
+            <!-- box-primary-nav-trigger -->
+        </header>
+        <!-- end box header -->
+
+        <!-- nav -->
+        <nav>
+            <ul class="box-primary-nav">
+
+                <li><a href="index.html">主頁</a> <i class="ion-ios-circle-filled color"></i></li>
+                <li><a href="gameoneintro.html">遊戲一介紹</a></li>
+                <li><a href="gameone.html">遊戲一</a></li>
+                <li><a href="gametwointro.html">遊戲二介紹</a></li>
+                <li><a href="gametwo.html">遊戲二</a></li>
+                <li><a href="rank.html">排行榜</a></li>
+
+
+                <li class="box-social"><a href="https://www.facebook.com/"><i class="ion-social-facebook"></i></a></li>
+                <li class="box-social"><a href="https://www.instagram.com/"><i class="ion-social-instagram-outline"></i></a></li>
+                <li class="box-social"><a href="https://twitter.com/?lang=zh-tw"><i class="ion-social-twitter"></i></a></li>
+            </ul>
+        </nav>
+        <!-- end nav -->
+
+        <!-- box-intro -->
+        <section class="box-intro">
+    <div class="bored_center" style="position: relative;top:100px;">
+        <p>The score bored</p>
+    </div>
+    <div id="score" class="bored_center">
+		<div>
+			<div id="userScore" style="display: inline;text-align: center"  >0</div>
+	
+			<p  style="display: inline;text-align: center" >-</p>
+
+			<div id="maoScore" style="display: inline;text-align: center ;"  >0</div>
+		</div>
+		<div id="socre_bored_p"> <!--  填字用  -->
+				<p></p>
+		</div>
+		<table border="0" style="display:inline">
+			<img src="images/user改.jpg" alt="user改" style="position: relative;left: -220px;top: 40px;height: 100px;width: 100px;">
+			<img src="images/空白.jpg" alt="user空白" style="position: relative;left: -120px;top: 40px;height: 100px;width: 100px;" id="userBlock">
+			<!-- --------------------------------------------------------------->
+			<img src="images/剪刀.jpg" alt="剪刀" style="position: relative;left:-545px;top: 255px;height: 100px;width: 100px;"id="scissors">
+			<img src="images/石頭.jpg" alt="石頭" style="position: relative;left:-525px;top: 420px;height: 100px;width: 100px;"id="rock">
+			<img src="images/布.jpg" alt="布" style="position: relative;left:-495px;top: 255px;height: 100px;width: 100px;"id="papper">
+			<!-- --------------------------------------------------------------->
+			<img src="images/空白.jpg" alt="魔王的空白" style="position: relative;left: 110px;top: 40px;height: 100px;width: 100px;" id ="maoBlock">
+			<img src="images/魔王的樣子八.jpg" alt="魔王的樣子八" style="position: relative;left:210px;top: 40px;height: 100px;width: 100px;">
+        </table>
+    </div>
+    <div id="board">
+		
+        <table border="1" >
+            <tr>
+                <td>
+                    <img src="images/空白.jpg" alt="1" style="position: relative;height: 100px;width: 100px;" id="1">
+                </td>
+                <td>
+                    <img src="images/空白.jpg" alt="2" style="position: relative;height: 100px;width: 100px;" id="2">
+                </td>
+                <td>
+                    <img src="images/空白.jpg" alt="3" style="position: relative;height: 100px;width: 100px;" id="3">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <img src="images/空白.jpg" alt="4" style="position: relative;height: 100px;width: 100px;" id="4">
+                </td>
+                <td>
+                    <img src="images/空白.jpg" alt="5" style="position: relative;height: 100px;width: 100px;" id="5">
+                </td>
+                <td>
+                    <img src="images/空白.jpg" alt="6" style="position: relative;height: 100px;width: 100px;" id="6">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <img src="images/空白.jpg" alt="7" style="position: relative;height: 100px;width: 100px;" id="7">
+                </td>
+                <td>
+                    <img src="images/空白.jpg" alt="8" style="position: relative;height: 100px;width: 100px;" id="8">
+                </td>
+                <td>
+                    <img src="images/空白.jpg" alt="9" style="position: relative;height: 100px;width: 100px;" id="9">
+                </td>
+            </tr>
+        </table>
+		<p style="position: relative;left: 1170px;top: -325px;max-width: 300px">
+			規則如下:
+			<br> 
+			1.進行猜拳
+			<br>
+			2.贏的人搶槌子拿打輸的人，輸的人搶頭盔來防禦
+			<br>
+			3.如果槌子先被拿到(輸的人沒有頭盔防禦)，則加分
+			<br>
+			4.若拿錯物品，對方加分
+			<br>
+			5.先獲得5分的一方獲勝
+			<br>
+			6.遊戲結束後，點擊restart即可重新開始遊戲!
+		</p>
+    </div>
+
+        </section>
+        <!-- end box-intro -->
+    </div>
+
+    <!-- portfolio div -->
+    <div class="portfolio-div">
+        <div class="portfolio">
+            <div class="no-padding portfolio_container">
+            </div>
+            <!-- end portfolio_container -->
+        </div>
+        <!-- portfolio -->
+    </div>
+    <!-- end portfolio div -->
+
+    <!-- footer -->
+    <!-- end footer -->
+
+    <!-- back to top -->
+    <a href="#0" class="cd-top"><i class="ion-android-arrow-up"></i></a>
+    <!-- end back to top -->
+
+
+
+    <!-- jQuery -->
+    <script src="js/jquery-2.1.1.js"></script>
+    <!--  plugins -->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/menu.js"></script>
+    <script src="js/animated-headline.js"></script>
+    <script src="js/isotope.pkgd.min.js"></script>
+
+
+    <!--  custom script -->
+    <script src="js/custom.js"></script>
+
+</body>
+</head>
+</html>
