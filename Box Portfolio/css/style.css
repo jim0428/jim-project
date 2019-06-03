@@ -37,7 +37,7 @@ body {
     height: 100%;
     font-family: 'Poppins', sans-serif;
     line-height: 1.8;
-    color: #999
+    color: #999;
 }
 
 .no-padding {
@@ -1177,3 +1177,51 @@ textarea:focus {
         line-height: 30px;
     }
 }
+<!-- <style>
+div{
+    width: 100%;
+    min-width: 1368px;
+}
+.bored_center{
+    text-align: center;
+    font-size:25pt;
+    font-weight: bold;
+    margin-top:-20px;
+}
+#score table{
+    border-collapse: collapse;
+    margin: 0px auto;
+}
+#score table tr td{
+    width: 25px;
+    text-align: center;
+}
+#score{
+    height:320px;
+}
+#head_zone{
+    height: 0px;
+}
+#board table{
+    border-collapse: collapse;
+    margin: 0px auto;
+}
+#board table tr td{
+    width: 100px;
+    height: 100px;
+    text-align: center;
+}
+#socre_bored_p{
+    text-align: center;
+    width: 20%;
+    position: relative;
+    top:30px;
+    height:50px;
+    min-width: 300px;
+    margin: 0px auto;
+}
+#rule{
+    min-width: 200px;
+    margin: 0px auto;
+}
+</style>

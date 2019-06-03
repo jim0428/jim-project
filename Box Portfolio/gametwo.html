@@ -17,54 +17,7 @@
         <!-- modernizr -->
         <script src="js/modernizr.js"></script>
 <head>
-        <style>
-                div{
-                    width: 100%;
-                    min-width: 1368px;
-                }
-                .bored_center{
-                    text-align: center;
-                    font-size:25pt;
-                    font-weight: bold;
-                    margin-top:-20px;
-                }
-                #score table{
-                    border-collapse: collapse;
-                    margin: 0px auto;
-                }
-                #score table tr td{
-                    width: 25px;
-                    text-align: center;
-                }
-                #score{
-                    height:320px;
-                }
-                #head_zone{
-                    height: 0px;
-                }
-                #board table{
-                    border-collapse: collapse;
-                    margin: 0px auto;
-                }
-                #board table tr td{
-                    width: 100px;
-                    height: 100px;
-                    text-align: center;
-                }
-                #socre_bored_p{
-                    text-align: center;
-                    width: 20%;
-                    position: relative;
-                    top:30px;
-                    height:50px;
-                    min-width: 300px;
-                    margin: 0px auto;
-                }
-                #rule{
-                    min-width: 200px;
-                    margin: 0px auto;
-                }
-    </style>
+ -->
 
 <script>
 		var WF = 0;
@@ -347,9 +300,9 @@
     <div id="preloader">
         <div class="pre-container">
             <div class="spinner">
-                <div class="double-bounce1"></div>
-                <div class="double-bounce2"></div>
-            </div>
+              <div class="double-bounce1"></div>
+              <div class="double-bounce2"></div>
+         </div>
         </div>
     </div>
     <!-- end Preloader -->
@@ -385,11 +338,11 @@
         <!-- end nav -->
 
         <!-- box-intro -->
-        <section class="box-intro">
-    <div class="bored_center" style="position: relative;top:100px;">
-        <p>The score bored</p>
-    </div>
-    <div id="score" class="bored_center">
+    <section class="box-intro" style="color: black;" >
+            <div class="bored_center" style="position: relative;top:100px;">
+                <p>The score bored</p>
+            </div>
+    <div id="score" class="bored_center" style="color: black;">
 		<div>
 			<div id="userScore" style="display: inline;text-align: center"  >0</div>
 	
@@ -400,7 +353,7 @@
 		<div id="socre_bored_p"> <!--  填字用  -->
 				<p></p>
 		</div>
-		<table border="0" style="display:inline">
+		<table border="0" style="display:inline" style="color: black;">
 			<img src="images/user改.jpg" alt="user改" style="position: relative;left: -220px;top: 40px;height: 100px;width: 100px;">
 			<img src="images/空白.jpg" alt="user空白" style="position: relative;left: -120px;top: 40px;height: 100px;width: 100px;" id="userBlock">
 			<!-- --------------------------------------------------------------->
@@ -412,7 +365,7 @@
 			<img src="images/魔王的樣子八.jpg" alt="魔王的樣子八" style="position: relative;left:210px;top: 40px;height: 100px;width: 100px;">
         </table>
     </div>
-    <div id="board">
+    <div id="board" >
 		
         <table border="1" >
             <tr>
@@ -449,21 +402,23 @@
                 </td>
             </tr>
         </table>
-		<p style="position: relative;left: 1170px;top: -325px;max-width: 300px">
-			規則如下:
-			<br> 
-			1.進行猜拳
-			<br>
-			2.贏的人搶槌子拿打輸的人，輸的人搶頭盔來防禦
-			<br>
-			3.如果槌子先被拿到(輸的人沒有頭盔防禦)，則加分
-			<br>
-			4.若拿錯物品，對方加分
-			<br>
-			5.先獲得5分的一方獲勝
-			<br>
-			6.遊戲結束後，點擊restart即可重新開始遊戲!
-		</p>
+        <div style="position: relative;left: 1200px;top: -325px;max-width: 300px;font-size: 18px;">
+                規則如下:
+                <br> 
+                1.進行猜拳
+                <br>
+                2.贏的人搶槌子拿打輸的人，輸的人搶頭盔來防禦
+                <br>
+                3.如果槌子先被拿到(輸的人沒有頭盔防禦)，則加分
+                <br>
+                4.若拿錯物品，對方加分
+                <br>
+                5.先獲得5分的一方獲勝
+                <br>
+                6.遊戲結束後，點擊restart即可重新開始遊戲!
+        </div>
+
+
     </div>
 
         </section>
