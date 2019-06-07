@@ -1103,13 +1103,67 @@ textarea:focus {
 
 .cat-ul li i {
     margin-right: 10px;
-    color: #ffbf00;
+    color: #ff0000;
 }
 
 
 /* Responsive media queries
 ==================================================*/
+/*---------------------------------jim style*/
 
+.tabletdsize{
+    font-size: 20px;
+    color: rgb(248, 37, 9);
+    font-weight: bold;
+}
+.tabletrsize{
+    width: 250px;
+    height:30px;
+}
+
+.texttop{
+    vertical-align:text-top;
+    font-size: 16px;
+}
+
+.cart {
+    overflow:hidden;
+    padding:10px 3px;
+    background: yellow;
+}
+
+.tooltip-inner {
+    font-size: 12px;
+    background: #FFFFFF;
+    border: 1px solid #737373;
+}
+table{
+    margin-left:auto; 
+    margin-right:auto;
+}
+.wrap {  
+    text-align: center;
+}
+.wrap ul {
+    list-style-type:decimal;
+    display: inline-block;
+}
+.wrap ul li{
+    font-size: 25px;
+}
+.adjust{
+    text-align: center;
+}
+.adjust p{
+    font-size: 80px;
+}
+/* #rule ul{
+    list-style-type:decimal;
+}
+#rule ul li{
+    font-size: 15px;
+} */
+/*-----------------------------------*/
 @media (max-width: 991px) {
     .portfolio .categories-grid span {
         margin-bottom: 0;
@@ -1177,7 +1231,7 @@ textarea:focus {
         line-height: 30px;
     }
 }
-<!-- <style>
+ <style>
 div{
     width: 100%;
     min-width: 1368px;
