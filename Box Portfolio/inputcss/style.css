@@ -1,0 +1,131 @@
+html, body, main {
+  height: 100%;
+}
+
+main {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 0 30px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: reverse;
+      -ms-flex-direction: column-reverse;
+          flex-direction: column-reverse;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  font-family: "Open Sans", Helvetica, Arial, sans-serif;
+}
+
+h1 {
+  margin-bottom: 20px;
+  font-size: 20px;
+  font-weight: 300;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  color: #bbb;
+}
+h1 span {
+  border: 2px solid #dfdfdf;
+  padding: 3px 2px 3px 7px;
+  border-radius: 6px;
+  font-weight: 400;
+}
+
+p {
+  margin-top: 10px;
+  font-size: 10px;
+  font-weight: bold;
+  color: #71ccd5;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.tags-input {
+  width: 300px;
+  border: 2px solid #dfdfdf;
+  border-radius: 40px;
+  height: 40px;
+  padding: 0 11px;
+  font-size: 14px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  overflow: hidden;
+  color: #888;
+}
+.tags-input span {
+  background: #bbb;
+  margin-right: 7px;
+  color: #fff;
+  padding: 4px 7px;
+  border-radius: 20px;
+}
+.tags-input span[data-selected] {
+  background: #71ccd5;
+}
+.tags-input::after {
+  content: "";
+  background: #888;
+  width: 1px;
+  height: 19px;
+  margin: -1px 0 0 -1px;
+  display: none;
+  -webkit-animation: blink 0.5s infinite alternate;
+          animation: blink 0.5s infinite alternate;
+}
+.tags-input:focus {
+  border-color: #71ccd5;
+  outline: none;
+}
+.tags-input:focus[data-cursor]::after {
+  display: block;
+}
+@media screen and (max-width: 736px) {
+  .tags-input:focus[data-cursor]::after {
+    display: none;
+  }
+}
+.tags-input:focus + h1 {
+  color: #71ccd5;
+}
+.tags-input:focus + h1 span {
+  border-color: #71ccd5;
+}
+
+@-webkit-keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  49% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  49% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
