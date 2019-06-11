@@ -15,11 +15,11 @@
 
     <!-- main css -->
     <link href="css/style.css" rel="stylesheet">
-
+    <link href="test.css" rel="stylesheet">
 
     <!-- modernizr -->
     <script src="js/modernizr.js"></script>
-
+    <script src="main.js"></script>
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -28,7 +28,7 @@
     <![endif]-->
 </head>
 
-<body  style="background-color: rgba(17, 19, 19, 0.055);">
+<body>
 
     <!-- Preloader -->
     <div id="preloader">
@@ -65,49 +65,31 @@
 
 
                 <li class="box-social"><a href="https://www.facebook.com/"><i class="ion-social-facebook"></i></a></li>
-                <li class="box-social"><a href="https://www.instagram.com/"><i class="ion-social-instagram-outline"></i></a></li>
-                <li class="box-social"><a href="https://twitter.com/?lang=zh-tw"><i class="ion-social-twitter"></i></a></li>
+                <li class="box-social"><a href="https://www.instagram.com/"><i
+                            class="ion-social-instagram-outline"></i></a></li>
+                <li class="box-social"><a href="https://twitter.com/?lang=zh-tw"><i class="ion-social-twitter"></i></a>
+                </li>
             </ul>
         </nav>
         <!-- end nav -->
 
-        <!-- box-intro -->
-        <section class="box-intro">
-            <div class="table-cell">
-                <h1 class="box-headline letters rotate-2">
-                    <span class="box-words-wrapper">
-                        <b class="is-visible">期末project</b>
-                        <b>&nbsp;&emsp;&nbsp;&nbsp;小遊戲</b>
-                    </span>
-		        </h1>
-                <h5>hope you have fun :)!</h5>
-            </div>
 
-            <div class="mouse">
-                <div class="scroll"></div>
-            </div>
-        </section>
-        <!-- end box-intro -->
     </div>
+        <form action="#">
+                <input type="text" name="enter" id="enter" style="position: absolute ;z-index: 1;">
+                <input type="submit" value="Submit" style="position: absolute ;z-index: 1;" />
+        </form>
+            <button id="push" onclick="javascript:startgame()" style="position: absolute ;z-index: 1; display:none;" class="btn-shine" >
+                <span style="font-size: 16px;">Start !!!</span>
+            </button>
 
-    <!-- portfolio div -->
-    <div class="portfolio-div">
-        <div class="portfolio">
-            <div class="no-padding portfolio_container">
-            </div>
-            <!-- end portfolio_container -->
-        </div>
-        <!-- portfolio -->
-    </div>
-    <!-- end portfolio div -->
-
-    <!-- footer -->
-    <!-- end footer -->
-
-    <!-- back to top -->
-    <a href="#0" class="cd-top"><i class="ion-android-arrow-up"></i></a>
-    <!-- end back to top -->
-
+    <!-- <div>
+        <input   type="button" value="start"
+            >
+    </div> -->
+    <!--<img src="images/wall.png"  style="position:absolute; top:0px;left:0% ;display: none;z-index: 2;" id="wall" > -->
+    <canvas id="myCanvas" style="position: absolute ;top:0%;left: 0%;z-index: 0;"  width="1500" height="500"></canvas>
+    <img src="images/ground.png" style="position:absolute; top:-9px;left:0% ;display: none;z-index: 1;" id="ground">
 
 
     <!-- jQuery -->
