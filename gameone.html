@@ -1,10 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-TW">
 
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Box personal portfolio Template</title>
     <link rel="icon" href="img/fav.png" type="image/x-icon">
@@ -17,8 +15,13 @@
     <link href="css/style.css" rel="stylesheet">
 
 
-    <!-- modernizr -->
+    <!--under this line is include by jim ----------------------------------------------------------------- -->
     <script src="js/modernizr.js"></script>
+    <script src="main.js"></script>
+    <link href="test.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+    <link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800'>
+    <link rel="stylesheet" href="inputcss/style.css">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -27,7 +30,7 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
- 
+
 <body>
 
     <!-- Preloader -->
@@ -72,42 +75,27 @@
             </ul>
         </nav>
         <!-- end nav -->
-
-        <!-- box-intro -->
-        <section class="box-intro">
-            <div class="table-cell">
-                <h1 class="box-headline letters rotate-2">
-                    <span class="box-words-wrapper">
-                        <b class="is-visible">期末project</b>
-                        <b>&nbsp;&emsp;&nbsp;&nbsp;小遊戲</b>
-                    </span>
-                </h1>
-                <h5>hope you have fun :)!</h5>
-            </div>
-
-
-        </section>
-        <!-- end box-intro -->
+ 
     </div>
+    <main style="z-index: 1" id="main">
+        <P id="alert" class="alert_css">*請輸入您的名字*</P>
+        <p>Please enter your name:)</p>
+        <input class="tags-input" onkeydown="_key()" id="input" ></input>
+        <h1><span>Name</span> Input</h1>
+    </main>
+    
+    <button id="push" onclick="javascript:startgame()" style="position: absolute ;z-index: 1;display: none"
+        class="btn-shine">
+        <span style="font-size: 16px;">Start !!!</span>
+    </button>
 
-    <!-- portfolio div -->
-    <div class="portfolio-div">
-        <div class="portfolio">
-            <div class="no-padding portfolio_container">
-            </div>
-            <!-- end portfolio_container -->
-        </div>
-        <!-- portfolio -->
-    </div>
-    <!-- end portfolio div -->
-
-    <!-- footer -->
-    <!-- end footer -->
-
-    <!-- back to top -->
-    <a href="#0" class="cd-top"><i class="ion-android-arrow-up"></i></a>
-    <!-- end back to top -->
-
+    <!-- <div>
+        <input   type="button" value="start"
+            >
+    </div> -->
+    <!--<img src="images/wall.png"  style="position:absolute; top:0px;left:0% ;display: none;z-index: 2;" id="wall" > -->
+    <canvas id="myCanvas" style="position: absolute ;top:0%;left: 0%;z-index: 0;" width="1500" height="500"></canvas>
+    <img src="images/ground.png" style="position:absolute; top:-9px;left:0% ;display: none;z-index: 1;" id="ground">
 
 
     <!-- jQuery -->
@@ -117,7 +105,8 @@
     <script src="js/menu.js"></script>
     <script src="js/animated-headline.js"></script>
     <script src="js/isotope.pkgd.min.js"></script>
-
+    <!-- under this is include by jim----------------------------------------------- -->
+    <script src="js/index.js"></script>
 
     <!--  custom script -->
     <script src="js/custom.js"></script>

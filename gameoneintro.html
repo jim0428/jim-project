@@ -27,9 +27,8 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
- 
-<body>
 
+<body style="background-color: rgba(17, 19, 19, 0.055);">
     <!-- Preloader -->
     <div id="preloader">
         <div class="pre-container">
@@ -72,21 +71,69 @@
             </ul>
         </nav>
         <!-- end nav -->
-
+        <div style="font-size: 100px;text-align: center;">
+            <P>打怪!</P>
+        </div>
+        <div style="vertical-align: top; ">
+            <table height="300px" width="500px" border="1">
+                <tr class="tabletrsize">
+                    <td>
+                        <p class="tabletdsize">角色內容:</p>
+                    </td>
+                    <td>
+                        <p class="tabletdsize">介紹:</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="250px"><img src="images/002.png" width="200px" height="150px"></td>
+                    <td class="texttop">
+                        <div id="panelPrecios">
+                            此遊戲的操控角色，按下<strong style="color: rgba(235, 17, 17, 0.904);font-family:serif"> W A S D </strong>可讓角色上下左右移動。
+                            <br>
+                            按下 <strong style="color: rgba(235, 17, 17, 0.904);font-family:serif"> M </strong> 即可對怪物發射
+                            <a data-toggle="tooltip"
+                                title="<img src='images/fireball.png' width='135px' height='135px'/>">
+                                火球
+                            </a>
+                            。
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="250px"><img src="images/badman_0002.png" width="180px" height="150px"></td>
+                    <td class="texttop">
+                        <div id="fire">
+                            此為一般怪物，目前版本不能做什麼事。
+                            <br>
+                            怪物死亡後會變為
+                            <a data-toggle="tooltip"
+                                title="<img src='images/behit2.png' width='135px' height='135px'/>">
+                                灼傷狀態
+                            </a> 維持一秒
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div style="text-align: center;">
+            <p style="font-size: 80px;margin-bottom: 0%">遊戲需知如下</p>
+        </div>
+        <div class="wrap">
+            <ul>
+                <li>玩家一進入遊戲請先輸入名稱</li>
+                <li>進入遊戲後請先按下正中間的<strong style="color: rgba(235, 17, 17, 0.904);font-family:serif">start</strong>紐</li>
+                <li>玩家將有1000滴血，怪物有100滴血</li>
+                <li>火球將會對怪物造成20點傷害</li>
+                <li>怪物至多10隻</li>
+                <li>結束之後可去排行榜進行查看分數</li>
+            </ul>
+        </div>
+        <div class="adjust">
+            <p>遊戲示意圖如下</p>
+            <img src="images/example2.png">
+        </div>
         <!-- box-intro -->
-        <section class="box-intro">
-            <div class="table-cell">
-                <h1 class="box-headline letters rotate-2">
-                    <span class="box-words-wrapper">
-                        <b class="is-visible">期末project</b>
-                        <b>&nbsp;&emsp;&nbsp;&nbsp;小遊戲</b>
-                    </span>
-                </h1>
-                <h5>hope you have fun :)!</h5>
-            </div>
 
-
-        </section>
         <!-- end box-intro -->
     </div>
 
@@ -110,6 +157,7 @@
 
 
 
+
     <!-- jQuery -->
     <script src="js/jquery-2.1.1.js"></script>
     <!--  plugins -->
@@ -117,8 +165,18 @@
     <script src="js/menu.js"></script>
     <script src="js/animated-headline.js"></script>
     <script src="js/isotope.pkgd.min.js"></script>
-
-
+    <script>
+        $('#panelPrecios [data-toggle="tooltip"]').tooltip({
+            animated: 'fade',
+            placement: 'top',
+            html: true
+        });
+        $('#fire [data-toggle="tooltip"]').tooltip({
+            animated: 'fade',
+            placement: 'top',
+            html: true
+        });
+    </script>
     <!--  custom script -->
     <script src="js/custom.js"></script>
 

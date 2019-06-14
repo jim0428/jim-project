@@ -1,0 +1,88 @@
+$white: #fff
+$blue: #71ccd5
+$dark-grey: #888
+$grey: #bbb
+$light-grey: #dfdfdf
+
+html, body, main
+  height: 100%
+
+main
+  max-width: 500px
+  margin: 0 auto
+  padding: 0 30px
+  display: flex
+  flex-direction: column-reverse
+  justify-content: center
+  font-family: 'Open Sans', Helvetica, Arial, sans-serif
+
+h1
+  margin-bottom: 20px
+  font-size: 20px
+  font-weight: 300
+  text-align: center
+  text-transform: uppercase
+  letter-spacing: 5px
+  color: $grey
+  span
+    border: 2px solid $light-grey
+    padding: 3px 2px 3px 7px
+    border-radius: 6px
+    font-weight: 400
+
+p
+  margin-top: 10px
+  font-size: 10px
+  font-weight: bold
+  color: $blue
+  text-align: center
+  text-transform: uppercase
+  letter-spacing: 1px
+
+.tags-input
+  border: 2px solid $light-grey
+  border-radius: 40px
+  height: 40px
+  padding: 0 11px
+  font-size: 14px
+  display: flex
+  align-items: center
+  overflow: hidden
+  color: $dark-grey
+  span
+    background: $grey
+    margin-right: 7px
+    color: $white
+    padding: 4px 7px
+    border-radius: 20px
+    &[data-selected]
+      background: $blue
+  &::after
+    content: ''
+    background: $dark-grey
+    width: 1px
+    height: 19px
+    margin: -1px 0 0 -1px
+    display: none
+    animation: blink 0.5s infinite alternate
+  &:focus
+    border-color: $blue
+    outline: none
+    &[data-cursor]::after
+      display: block
+      @media screen and (max-width: 736px)
+        display: none
+    + h1
+      color: $blue
+      span
+        border-color: $blue
+
+@keyframes blink
+  0%
+    opacity: 1
+  49%
+    opacity: 1
+  50%
+    opacity: 0
+  100%
+    opacity: 0

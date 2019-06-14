@@ -27,8 +27,8 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
- 
-<body>
+
+<body style="background-color: rgba(17, 19, 19, 0.055);">
 
     <!-- Preloader -->
     <div id="preloader">
@@ -74,33 +74,52 @@
         <!-- end nav -->
 
         <!-- box-intro -->
-        <section class="box-intro">
-            <div class="table-cell">
-                <h1 class="box-headline letters rotate-2">
-                    <span class="box-words-wrapper">
-                        <b class="is-visible">期末project</b>
-                        <b>&nbsp;&emsp;&nbsp;&nbsp;小遊戲</b>
-                    </span>
-                </h1>
-                <h5>hope you have fun :)!</h5>
-            </div>
 
-
-        </section>
         <!-- end box-intro -->
     </div>
 
     <!-- portfolio div -->
     <div class="portfolio-div">
-        <div class="portfolio">
+        <div class="portfolio" style="text-align: center;">
             <div class="no-padding portfolio_container">
+
             </div>
-            <!-- end portfolio_container -->
         </div>
         <!-- portfolio -->
     </div>
     <!-- end portfolio div -->
-
+    <div style="text-align: center;">
+        <span style="font-family:serif;font-size: 100px">Rock paper scissors</span>
+    </div>
+    <div id="hammer">
+        <p style="text-align: center;font-size: 25px">規則如下: <br>
+            1.進行猜拳 <br>
+            2.<strong class="introtwo">贏</strong>的人搶
+            <a class="introtwo" data-toggle="tooltip" title="<img src='images/槌子.jpg' width='135px' height='135px'/>">
+                鎚子
+            </a>
+            拿打輸的人，
+            <strong class="introtwo">輸</strong>的人搶
+            <a class="introtwo" data-toggle="tooltip" title="<img src='images/頭盔.jpg' width='135px' height='135px'/>">
+                頭盔
+            </a>
+            來防禦
+            <br>
+            3.如果槌子先被拿到(輸的人沒有頭盔防禦)，則加分 <br>
+            4.若拿錯物品，對方加分 <br>
+            5.先獲得5分的一方獲勝 <br>
+            6.遊戲結束後，點擊 <a style="color: rgba(67, 231, 236, 0.842);font-weight: bolder" data-toggle="tooltip"
+                title="<img src='images/restart.PNG' width='135px' height='135px'/>">
+                restart
+            </a>即可重新開始遊戲!</p>
+    </div>
+    <div style="text-align: center; font-size:100px;">
+        <p>遊戲示意圖如下</p>
+    </div>
+    <div style="text-align: center;">
+        <img src="images/example.png" height="480px;">
+    </div>
+    <br><br>
     <!-- footer -->
     <!-- end footer -->
 
@@ -109,7 +128,7 @@
     <!-- end back to top -->
 
 
-
+    
     <!-- jQuery -->
     <script src="js/jquery-2.1.1.js"></script>
     <!--  plugins -->
@@ -117,7 +136,18 @@
     <script src="js/menu.js"></script>
     <script src="js/animated-headline.js"></script>
     <script src="js/isotope.pkgd.min.js"></script>
-
+    <script>
+        $('#hammer [data-toggle="tooltip"]').tooltip({
+            animated: 'fade',
+            placement: 'top',
+            html: true
+        });
+        $('#fire [data-toggle="tooltip"]').tooltip({
+            animated: 'fade',
+            placement: 'top',
+            html: true
+        });
+    </script>
 
     <!--  custom script -->
     <script src="js/custom.js"></script>

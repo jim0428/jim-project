@@ -17,9 +17,37 @@
     <link href="css/style.css" rel="stylesheet">
 
 
+    <!-- jQuery -->
+    <script src="js/jquery-2.1.1.js"></script>
     <!-- modernizr -->
     <script src="js/modernizr.js"></script>
+    <script type="text/javascript">
+        $.ajax({
+            url: "score.php",
+            data: {
+                name: "",
+                score: ""
+            },
+            type: "POST",
+            datatype: "html",
+            success: function (output) {
+                $("#rank").html(output);
+            },
+            error: function () {
+                alert("Request failed.");
+            }
+        });
+    </script>
+    <style>
+        .eeeee {
 
+            font-size: 35px;
+            text-align: center;
+        }
+        .eeeee table tr td{
+            width: 300px;
+        }
+    </style>
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -27,8 +55,8 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
- 
-<body>
+
+<body style="background-color: rgba(17, 19, 19, 0.055);">
 
     <!-- Preloader -->
     <div id="preloader">
@@ -74,19 +102,13 @@
         <!-- end nav -->
 
         <!-- box-intro -->
-        <section class="box-intro">
-            <div class="table-cell">
-                <h1 class="box-headline letters rotate-2">
-                    <span class="box-words-wrapper">
-                        <b class="is-visible">期末project</b>
-                        <b>&nbsp;&emsp;&nbsp;&nbsp;小遊戲</b>
-                    </span>
-                </h1>
-                <h5>hope you have fun :)!</h5>
-            </div>
+        <div style=" margin-left:auto; 
+        margin-right:auto;">
+            <p style="font-size: 100px;text-align: center;">遊戲一排行榜</p>
+        </div>
+        <div id="rank" class="eeeee">
 
-
-        </section>
+        </div>
         <!-- end box-intro -->
     </div>
 
@@ -110,8 +132,6 @@
 
 
 
-    <!-- jQuery -->
-    <script src="js/jquery-2.1.1.js"></script>
     <!--  plugins -->
     <script src="js/bootstrap.min.js"></script>
     <script src="js/menu.js"></script>
