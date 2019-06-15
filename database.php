@@ -1,6 +1,6 @@
 <?php
         
-        if ( !( $database = mysqli_connect( "localhost", "jim0428", "noxAsbjQXdwdaTh4" ) ) )
+        if ( !( $database = mysqli_connect( "140.138.241.110", "jim0428", "noxAsbjQXdwdaTh4" ) ) )
             die( "Could not connect to database </body></html>" );
         
         if ( !($conn = mysqli_select_db($database,"jimproject" )) )
